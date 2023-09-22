@@ -2,41 +2,60 @@
 
 ==============================================================================
 Content
-    
-    0. Installation
-	1. Description				    |po-introduction|
-	2. Mappings						|po-mappings|
-	3. Others functionalities	    |po-func|
-	4. History						|po-history|
+
+    1. Installation                 |po-installation|
+	2. Description				    |po-introduction|
+	3. Mappings						|po-mappings|
+	4. Others functionalities	    |po-func|
+	5. History						|po-history|
 
 ==============================================================================
-0. Installation
+  1. INSTALLATION                                              *po-installation*
 
-Put this file in a Vim ftplugin directory. On UNIX computers it is
-usually either "~/.vim/ftplugin" or "~/.vim/after/ftplugin". On Windows
-computers, the defaults are "$VIM\vimfiles\ftplugin" or
-"$VIM\vimfiles\after\ftplugin". For more information consult the Vim
-help, ":help 'ftplugin'" and ":help 'runtimepath'".
+Method 1
+  Use your favorite runtimepath/plugin manager.
 
-REMOVAL
-Just delete the bloody file!
+Method 2
+    If you are using Vim 8.0 or above, move this directory to its appropriate
+    location:
+    On Unix-like systems: >
+    ~/.vim/pack/{whatever name you want}/opt/vim-popot
+<
+  On Windows: >
+    %userprofile%\vimfiles\pack\{whatever name you want}\opt\vim-popot
+<
+  See `:help package`.
 
-1. Introduction												*po-introduction*
+Method 3
+    If you are using Vim 7.4 or below, move the files in this directory to their
+    standard location.
+  On Unix-like systems: >
+    ~/.vim/ftplugin/po.vim
+    ~/.vim/autoload/po.vim
+    ~/.vim/doc/po.txt
+    ~/.vim/plugin/po.vim
+<
+  On Windows: >
+    %userprofile%\vimfiles\ftplugin\po.vim
+    %userprofile%\vimfiles\autoload\po.vim
+    %userprofile%\vimfiles\doc\po.txt
+    %userprofile%\vimfiles\plugin\po.vim
+<
+
+ REMOVAL
+Use package manager to remove package, or manualy remove folder from `opt`
+directory, or manyally remove po.* files from respective directories.
+
+==============================================================================
+
+ 2. INTRODUCION												*po-introduction*
 
 This file is a Vim ftplugin for editing PO files (GNU gettext -- the GNU
 i18n and l10n system). It automates over a dozen frequent tasks that
 occur while editing files of this type.
 
-Latest version of this script:
-http://gitorious.org/local-etc/local-etc/blobs/master/vim/ftplugin/po.vim
-
-Latest version of the help doc: (thanks to Emmanuel Trillaud ;-)
-http://gitorious.org/local-etc/local-etc/blobs/master/vim/doc/po.txt
-
-(Sorry for the inconvenience that separate them, I think it's too small to
-form a stand-along project)
 ==============================================================================
-2. Key mappings												*po-mappings*
+ 3. Mappings												*po-mappings*
 
 Insert mode mapping~
     Actions			                           Key mappings
