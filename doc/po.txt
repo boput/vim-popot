@@ -3,11 +3,11 @@
 ==============================================================================
 Content
 
-    1. Installation                 |po-installation|
-	2. Description				    |po-introduction|
-	3. Mappings						|po-mappings|
-	4. Others functionalities	    |po-func|
-	5. History						|po-history|
+    1. Installation                               |po-installation|
+	2. Description				                  |po-introduction|
+	3. Mappings						              |po-mappings|
+	4. Others functionalities	                  |po-func|
+	5. History						              |po-history|
 
 ==============================================================================
   1. INSTALLATION                                              *po-installation*
@@ -27,8 +27,8 @@ Method 2
   See `:help package`.
 
 Method 3
-    If you are using Vim 7.4 or below, move the files in this directory to their
-    standard location.
+    If you are using Vim 7.4 or below, move the files in this directory to
+    their standard location.
   On Unix-like systems: >
     ~/.vim/ftplugin/po.vim
     ~/.vim/autoload/po.vim
