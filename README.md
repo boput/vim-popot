@@ -9,10 +9,12 @@ other functions and remapped the keys. Thanks to Aleksandar Jelenak a lot.
 
 Original Creator:	Aleksandar Jelenak <ajelenak AT yahoo.com>
 Modifier: Grissiom <chaos.proton AT gmail.com>
+
 Last Change by Original Creator:	Tue, 12 Apr 2005 13:49:55 -0400
 *** Latest version of original script: http://www.vim.org/scripts/script.php?script_id=695 ***
+
 *** Latest version of modified verion:
-http://repo.or.cz/w/grissiom.projects.git?a=blob_plain;f=vim/ftplugin/po.vim ***
+https://github.com/vim-scripts/po.vim--gray ***
 
 # Package vim-popot
 
