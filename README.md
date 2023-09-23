@@ -1,3 +1,4 @@
+## From A. Jelenak/Grissiom introduction:
 Vim ftplugin for PO file (GNU gettext) editing.
 
 This script is a fork version of Aleksandar Jelenak's script. Since the
