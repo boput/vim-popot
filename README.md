@@ -14,7 +14,8 @@ Last Change by Original Creator:	Tue, 12 Apr 2005 13:49:55 -0400
 http://repo.or.cz/w/grissiom.projects.git?a=blob_plain;f=vim/ftplugin/po.vim ***
 
 # Package vim-popot
-## vim-popot is produced by packing Grissiom's latest version into package using exclusively vim9script.
+
+vim-popot is produced by packing Grissiom's latest version into package using exclusively vim9script.
 
 ## Description
     This file is a Vim package for editing PO files (GNU gettext -- the GNU
