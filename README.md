@@ -1,3 +1,4 @@
+Editing .po and .pot file with Vim
 ## From A. Jelenak/Grissiom introduction:
 Vim ftplugin for PO file (GNU gettext) editing.
 
@@ -10,10 +11,11 @@ other functions and remapped the keys. Thanks to Aleksandar Jelenak a lot.
 Original Creator:	Aleksandar Jelenak <ajelenak AT yahoo.com>
 Modifier: Grissiom <chaos.proton AT gmail.com>
 
-Last Change by Original Creator:	Tue, 12 Apr 2005 13:49:55 -0400
+Last Change by Original Creator A. Jelenak:	Tue, 12 Apr 2005 13:49:55 -0400
 *** Latest version of original script: http://www.vim.org/scripts/script.php?script_id=695 ***
 
-*** Latest version of modified verion: https://github.com/vim-scripts/po.vim--gray ***
+*** Latest by Grissiom modified version:
+https://github.com/vim-scripts/po.vim--gray ***
 
 # Package vim-popot
 
