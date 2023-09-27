@@ -1,4 +1,4 @@
-Editing .po and .pot file with Vim
+Editing gettext .po and .pot file with Vim
 ## From A. Jelenak/Grissiom introduction:
 Vim ftplugin for PO file (GNU gettext) editing.
 

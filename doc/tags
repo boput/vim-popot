@@ -1,5 +1,4 @@
-po-func	po.txt	/*po-func*
-po-history	po.txt	/*po-history*
-po-introduction	po.txt	/*po-introduction*
-po-mappings	po.txt	/*po-mappings*
-po.txt	po.txt	/*po.txt*
+po-pot.func	po-pot.txt	/*po-pot.func*
+po-pot.introduction	po-pot.txt	/*po-pot.introduction*
+po-pot.mappings	po-pot.txt	/*po-pot.mappings*
+po-pot.txt	po-pot.txt	/*po-pot.txt*

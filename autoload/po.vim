@@ -1,4 +1,4 @@
-vim9script
+vim9script noclear
 
 const is_win = has('win32')
 
@@ -82,7 +82,7 @@ if !exists('*DeleteTrans')
   enddef
 endif
 
-# Move to the next fuzzy translation
+# Move to the next fuzzy (marked with fuzzy flag, `#, fuzzy`) translation
 if !exists('*NextFuzzy')
   export def NextFuzzy()
     if search('^#,\(.*,\)\=\s*fuzzy') > 0
@@ -98,7 +98,7 @@ if !exists('*NextFuzzy')
   enddef
 endif
 
-# Move to the previous fuzzy translation
+# Move to the previous fuzzy (marked with fuzzy flag, `#, fuzzy`) translation
 if !exists('*PreviousFuzzy')
   export def PreviousFuzzy()
     normal {
@@ -175,7 +175,7 @@ if !exists('*RemovePrevious')
   enddef
 endif
 
-# Show msgfmt statistics for current .po file
+# Show `msgfmt` statistics for current .po file
 if !exists('*Msgfmt')
   export def Msgfmt()
     # Check if the file needs to be saved first.
@@ -188,7 +188,7 @@ if !exists('*Msgfmt')
   enddef
 endif
 
-# Browse through msgfmt errors for the file
+# Browse through `msgfmt` errors for the file
 # TODO
 
 # Add (insert) translator info (person, team, lang, plural) in the file header
