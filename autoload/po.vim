@@ -188,7 +188,7 @@ if !exists('*Msgfmt')
   enddef
 endif
 
-# Browse through `msgfmt` errors for the file
+# Browse through msgfmt errors for the file
 # TODO
 
 # Add (insert) translator info (person, team, lang, plural) in the file header
@@ -196,34 +196,54 @@ if !exists('AddHeaderInfo')
   export def AddHeaderInfo(action: string)
     var search_for: string
     var add: string
+    # Adding 'Last-translator'
     if action == 'person'
       if exists('g:po_translator')
         search_for = 'Last-Translator'
         add = g:po_translator
       endif
+    # Adding 'Language-Team'
     elseif action == 'team'
       if exists('g:po_lang_team')
         search_for = 'Language-Team'
         add = g:po_lang_team
       endif
+    # Adding 'Language'
     elseif action == 'lang'
       if exists('g:po_language')
         search_for = 'Language'
         add = g:po_language
       endif
+    # Adding 'Plural-Forms' 
     elseif action == 'plural'
       if exists('g:po_plural_form')
         search_for = 'Plural-Forms'
         add = g:po_plural_form
       endif
-     else
+    # Adding 'Content-Type'
+    elseif action == 'charset'
+      if exists('g:po_charset')
+        search_for = 'Content-Type'
+        add = g:po_charset
+      endif
+    # Adding 'X-Generator'
+    elseif action == 'xgen'
+      if exists('g:po_xgenerator')
+        search_for = 'X-Generator'
+        add = g:po_xgenerator
+      endif
+    else
+      # Does nothing'
       return
     endif
+    # Common script
     search_for = '"' .. search_for .. ':'
     add = add .. '\\n"'
     normal! 1G
     if search('^' .. search_for) >= 0
-      silent! exe 's/^\(' .. search_for .. '\).*$/\1 ' .. add
+      # silent! exe 's/^\(' .. search_for .. '\).*$/\1 ' .. add
+      # we clear the line then insert corresponding text
+      silent! exe 's/^.*$/' .. search_for .. ' ' .. add
       call histdel('/', -1)
     endif
   enddef
