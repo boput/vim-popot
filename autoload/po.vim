@@ -175,6 +175,12 @@ if !exists('*RemovePrevious')
   enddef
 endif
 
+export def ClearFuzzyPreviousMessges()
+  call po#RemovePrevious()
+  call po#RemoveFuzzy()
+enddef
+
+
 # Show `msgfmt` statistics for current .po file
 if !exists('*Msgfmt')
   export def Msgfmt()
@@ -241,9 +247,9 @@ if !exists('AddHeaderInfo')
     add = add .. '\\n"'
     normal! 1G
     if search('^' .. search_for) >= 0
-      # silent! exe 's/^\(' .. search_for .. '\).*$/\1 ' .. add
+      silent! exe 's/^\(' .. search_for .. '\).*$/\1 ' .. add
       # we clear the line then insert corresponding text
-      silent! exe 's/^.*$/' .. search_for .. ' ' .. add
+      # silent! exe 's/^.*$/{search_for .. ' ' .. add}
       call histdel('/', -1)
     endif
   enddef
@@ -260,9 +266,11 @@ if !exists('*PoFileTimestamp')
     var hist_search = histnr('/')
     var old_report = 'set report=' .. &report
     &report = 100
-    var cursor_pos_cmd = line('.') .. 'normal! ' .. virtcol('.')
-    normal! H
-    var scrn_pos = line('.') .. 'normal! zt'
+    # var cursor_pos_cmd = line('.') .. 'normal! ' .. virtcol('.')
+    # normal! H
+    # var scrn_pos = line('.') .. 'normal! zt'
+    # Remember position
+    normal! md
     # Update revision time
     normal! 1G
     var topfuzzy = search('^#, fuzzy')
@@ -276,8 +284,9 @@ if !exists('*PoFileTimestamp')
       call histdel("/", -1)
     endwhile
     #
-    normal :scrn_pos
-    normal :cursor_pos_cmd
+    normal `d
+    # normal :scrn_pos
+    # normal :cursor_pos_cmd
   enddef
 endif
 

@@ -13,10 +13,13 @@ set cpo&vim
 setlocal commentstring=#\ %s
 setlocal errorformat=%f:%l:\ %m
 
+g:maplocalleader = ","
+
 # setlocal makeprg=msgfmt
 
 # Make `f` of vim-sneak search for one character
-map f <Plug>Sneak_f
+# map f <Plug>Sneak_f
+# nmap ? <Plug>Sneak_f
 
 import autoload 'po.vim'
 
@@ -53,17 +56,17 @@ endif
 
 # Move to next untranslated `msgstr` FORWARD...
 if empty(maparg('<LocalLeader>u', 'n'))
-  nnoremap <buffer> <unique> <LocalLeader>u <ScriptCmd>po.NextTransFwd()<CR>z.f"a
+  nnoremap <buffer> <unique> <LocalLeader>u <ScriptCmd>po.NextTransFwd()<CR>z.f"
 endif
 if empty(maparg('<LocalLeader>u', 'i'))
-  inoremap <buffer> <unique> <LocalLeader>u <Esc><ScriptCmd>po.NextTransFwd()<CR>z.f"a
+  inoremap <buffer> <unique> <LocalLeader>u <Esc><ScriptCmd>po.NextTransFwd()<CR>z.f"
 endif
 # or BACKWARD.
 if empty(maparg('<LocalLeader>U', 'n'))
-  nnoremap <buffer> <unique> <LocalLeader>U <ScriptCmd>po.NextTransBwd()<CR>z.f"a
+  nnoremap <buffer> <unique> <LocalLeader>U <ScriptCmd>po.NextTransBwd()<CR>z.f"
 endif
 if empty(maparg('<LocalLeader>U', 'i'))
-  inoremap <buffer> <unique> <LocalLeader>U <Esc><ScriptCmd>po.NextTransBwd()<CR>z.f"a
+  inoremap <buffer> <unique> <LocalLeader>U <Esc><ScriptCmd>po.NextTransBwd()<CR>z.f"
 endif
 
 # Copy current `msgid` to `msgstr`
@@ -123,10 +126,27 @@ if empty(maparg('<LocalLeader>r', 'i'))
   inoremap <buffer> <unique> <LocalLeader>r <Esc><ScriptCmd>po.RemovePrevious()<CR>
 endif
 
+# # # Clear `fuzzy` and `previous` flag from current entry
+if empty(maparg('<LocalLeader>d', 'n'))
+  nnoremap <buffer> <unique> <LocalLeader>dd <ScriptCmd>po.RemoveFuzzy()<CR> <bar>  <ScriptCmd>po.RemovePrevious()<CR>
+endif
+if empty(maparg('<LocalLeader>d', 'i'))
+  inoremap <buffer> <unique> <LocalLeader>dd <Esc><ScriptCmd>po.RemoveFuzzy()<CR> <bar> <ScriptCmd>po.RemovePrevious()<CR>
+endif
+
 # TIMESTAMP: Every time file is saved PO-Revision-Date is updated
-augroup PoFileTimestamp |  autocmd!
-  autocmd BufWrite *.po,*.po.pot,*.po.gz :call po#PoFileTimestamp()
-augroup END
+# augroup PoFileTimestamp |  autocmd!
+#   autocmd BufWritePre *.po :call po#PoFileTimestamp()
+# augroup END
+
+command! -nargs=0 PoAddHeaderAll
+  \ call po#AddHeaderInfo('person') |
+  \ call po#AddHeaderInfo('team') |
+  \ call po#AddHeaderInfo('plural') |
+  \ call po#AddHeaderInfo('xgen') |
+  \ call po#AddHeaderInfo('charset')
+
+command! -nargs=0 PoTimestampUpdate call po#PoFileTimestamp()
 
 b:undo_ftplugin = (get(b:, 'undo_ftplugin') ?? 'execute')
     .. '| set commentstring<'
