@@ -32,45 +32,46 @@ Latest version of this script: https://github.com/boput/vim-popot
 Insert mode mapping~
     Actions			                                      Key mappings
     ------------------------------------------------------------------
-    Move to a string (transl. or untransl) forward      <LocalLeader>m
-    Move to a string (transl. or untransl) backward     <LocalLeader>M
-    Begin to comment this entry                         <LocalLeader>C
-    Move to an untransl. string forward                 <LocalLeader>u
-    Move to an untransl. string backward                <LocalLeader>U
-    Copy the msgid string to msgstr                     <LocalLeader>c
-    Delete the msgstr string                            <LocalLeader>d
-    Move to the next fuzzy translation                  <LocalLeader>f
-    Move to the previous fuzzy translation              <LocalLeader>F
-    Insert fuzzy flag                                   <LocalLeader>Z
-    Remove fuzzy flag                                   <LocalLeader>z
-    Remove previous translations, marked with #|        <LocalLeader>r
-    Show msgfmt statistics for the file(*)              <LocalLeader>s
-    Browse through msgfmt errors for the file(*)        <LocalLeader>e
-    Put the translator info in the header               <LocalLeader>t
-    Put the lang. team info in the header               <LocalLeader>l
-    Format the whole file(wrap the lines etc.)          <LocalLeader>W
+    Move to a string (un)translated forward             ,m
+    Move to a string (un)translated backward            ,M
+    Begin to comment this entry                         ,C
+    Move to an untranslated string forward              ,u
+    Move to an untranslated string backward             ,U
+    Copy this msgid string to corresponding msgstr      ,c
+    Delete this msgstr string                           ,d
+    Move to the next fuzzy translation                  ,f
+    Move to the previous fuzzy translation              ,F
+    Insert fuzzy flag                                   ,Z
+    Remove fuzzy flag                                   ,z
+    Remove previous translations, marked with #|        ,r
+    Show msgfmt statistics for the file(*)              ,s
+    Browse through msgfmt errors for the file(*)        ,e
+    Put the translator info in the header               ,t
+    Put the lang. team info in the header               ,l
+    Format the whole file(wrap the lines etc.)          ,W
     ------------------------------------------------------------------
     (*) Only available on UNIX computers.
 
 Normal mode mappings~
     Actions			                                      Key mappings
     ------------------------------------------------------------------
-    Move to a string (transl. or untransl) forward      <LocalLeader>m
-    Move to a string (transl. or untransl) backward     <LocalLeader>M
-    Begin to comment this entry                         <LocalLeader>C
-    Move to an untransl. string forward                 <LocalLeader>u
-    Move to an untransl. string backward                <LocalLeader>U
-    Move to the next fuzzy translation                  <LocalLeader>f
-    Move to the previous fuzzy translation              <LocalLeader>F
-    Insert fuzzy flag                                   <LocalLeader>Z
-    Remove fuzzy flag                                   <LocalLeader>z
-    Remove previous translations, marked with #|        <LocalLeader>r
-    Split-open the file under cursor                    gf
-    Show msgfmt statistics for the file(*)              <LocalLeader>s
-    Browse through msgfmt errors for the file(*)        <LocalLeader>e
-    Put the translator info in the header               <LocalLeader>t
-    Put the lang. team info in the header               <LocalLeader>l
-    Format the whole file(wrap the lines etc.)          <LocalLeader>W
+    Move to a string (un)translated forward             ,m
+    Move to a string (un)translated backward            ,M
+    Begin to comment this entry                         ,C
+    Move to an untranslated string forward              ,u
+    Move to an untranslated string backward             ,U
+    Copy this msgid string to corresponding msgstr      ,c
+    Delete this msgstr string                           ,d
+    Move to the next fuzzy translation                  ,f
+    Move to the previous fuzzy translation              ,F
+    Insert fuzzy flag                                   ,Z
+    Remove fuzzy flag                                   ,z
+    Remove previous translations, marked with #|        ,r
+    Show msgfmt statistics for the file(*)              ,s
+    Browse through msgfmt errors for the file(*)        ,e
+    Put the translator info in the header               ,t
+    Put the lang. team info in the header               ,l
+    Format the whole file(wrap the lines etc.)          ,W
     ------------------------------------------------------------------
     (*) Only available on UNIX computers.
 
