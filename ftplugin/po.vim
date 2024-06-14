@@ -7,7 +7,7 @@ endif
 b:did_ftplugin = true
 
 g:save_cpo = &cpo
-set cpo&vim
+setlocal cpo&vim
 
 # comments string for po, pot files
 setlocal commentstring=#\ %s
@@ -21,7 +21,8 @@ g:maplocalleader = ","
 # map f <Plug>Sneak_f
 # nmap ? <Plug>Sneak_f
 
-import autoload 'po.vim'
+# import autoload 'po.vim'
+import autoload '../autoload/po.vim'
 
 # TODO
 # b:po_path = '.,..,../src,../src/*'

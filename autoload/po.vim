@@ -264,7 +264,7 @@ endif
 if !exists('*PoFileTimestamp')
   export def PoFileTimestamp()
     var hist_search = histnr('/')
-    var old_report = 'set report=' .. &report
+    var old_report = 'setlocal report=' .. &report
     &report = 100
     # var cursor_pos_cmd = line('.') .. 'normal! ' .. virtcol('.')
     # normal! H
