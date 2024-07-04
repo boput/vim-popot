@@ -8,8 +8,8 @@ const is_win = has('win32')
 if !exists('*NextStringFwd')
   export def NextStringFwd()
     search('^msgstr\(\[\d\]\)\=')
-    @/ = ""
-    call histdel('/', -1)
+    @/ = ''
+    histdel('/', -1)
     normal z.f"
   enddef
 endif
@@ -20,7 +20,7 @@ if !exists('*NextStringBwd')
       normal! k
     search('^msgstr\(\[\d\]\)\=', 'b')
     @/ = ''
-    call histdel('/', -1)
+    histdel('/', -1)
     normal z.f"
   enddef
 endif
@@ -36,8 +36,8 @@ endif
 if !exists('*NextTransFwd')
   export def NextTransFwd()
     search('^msgstr\(\[\d\]\)\=\s*""\(\n\n\)\|\%$')
-    @/ = ""
-    call histdel('/', -1)
+    @/ = ''
+    histdel('/', -1)
     normal z.f"
   enddef
 endif
@@ -47,8 +47,8 @@ if !exists('*NextTransBwd')
   export def NextTransBwd()
     normal! k
     search('^msgstr\(\[\d\]\)\=\s*""\(\n\n\)\|\%$', 'b')
-    @/ = ""
-    call histdel('/', -1)
+    @/ = ''
+    histdel('/', -1)
     normal z.f"
   enddef
 endif
@@ -58,13 +58,13 @@ if !exists('*CopyMsgid')
   export def CopyMsgid()
     normal }
     search('^msgid', 'b')
-    @/ = ""
-    call histdel('/', -1)
+    @/ = ''
+    histdel('/', -1)
     normal f"
     onoremap __ /msgstr<CR>
     normal y__
     @/ = ''
-    call histdel('/', -1)
+    histdel('/', -1)
     normal jf""_d$p
     normal 0f"l
   enddef
@@ -73,10 +73,10 @@ endif
 # Delete current `msgstr` string
 if !exists('*DeleteTrans')
   export def DeleteTrans()
-    normal }  
+    normal }
     search('^msgstr', 'b')
     @/ = ''
-    call histdel('/', -1)
+    histdel('/', -1)
     normal f"
     normal lc}"
   enddef
@@ -87,10 +87,10 @@ if !exists('*NextFuzzy')
   export def NextFuzzy()
     if search('^#,\(.*,\)\=\s*fuzzy') > 0
       @a/ = ''
-      call histdel('/', -1)
+      histdel('/', -1)
       search('^msgstr')
       @a = ''
-      call histdel('/', -1)
+      histdel('/', -1)
       normal z.f"l
     else
       echomsg 'No more `fuzzy` flags'
@@ -104,10 +104,10 @@ if !exists('*PreviousFuzzy')
     normal {
     if search('^#,\(.*,\)\=\s*fuzzy', 'b') > 0
       @a/ = ''
-      call histdel('/', -1)
+      histdel('/', -1)
       search('^msgstr')
       @a = ''
-      call histdel('/', -1)
+      histdel('/', -1)
       normal z.f"l
     else
       echomsg 'No more `fuzzy` flags'
@@ -118,28 +118,29 @@ endif
 # Mark current entry with `fuzzy` flag
 if !exists('*InsertFuzzy')
   export def InsertFuzzy()
-    normal {  
-    var firstline = line('.')
+    normal {
+    var firstline = line('.') + 1
     normal }k
-    var lastline = line('.')
-    for i in range(firstline, lastline)
+    var lastline = line('.') - 1
+    for i in range(lastline, firstline, -1)
       if getline(i) =~ '^#,.*fuzzy'
         return
-      elseif getline(i) =~ '^#,'
+      elseif getline(i) =~ '^#,.*'
         setline(i, substitute(getline(i), '#,', '#, fuzzy,', ""))
         return
-      elseif getline(i) !~ '^#'
-        append(i - 1, '#, fuzzy')
+      elseif getline(i) =~ '^#:'
+        append(i, '#, fuzzy')
         return
       endif
     endfor
   enddef
 endif
+defcompile
 
 # Clear `fuzzy` flag from current entry
 if !exists('*RemoveFuzzy')
   export def RemoveFuzzy()
-    normal {  
+    normal {
     var firstline = line('.')
     normal }k
     search('^#, fuzzy\|^#,\(.*,\)\=\s*fuzzy', 'b', firstline)
@@ -150,7 +151,7 @@ if !exists('*RemoveFuzzy')
     endif
     search('^msgstr')
     @a = ''
-    call histdel('/', -1)
+    histdel('/', -1)
     normal z.f"l
   enddef
 endif
@@ -158,11 +159,11 @@ endif
 # Remove previous (now fuzzy) translation from current entry
 if !exists('*RemovePrevious')
   export def RemovePrevious()
-    normal {  
+    normal {
     var firstline = line('.')
     normal }k
     var lastline = line('.')
-    for i in range(firstline, lastline) 
+    for i in range(firstline, lastline)
     search('^#|', 'b', firstline)
        if getline('.') =~ '^#|'
          normal! dd
@@ -170,14 +171,14 @@ if !exists('*RemovePrevious')
     endfor
     search('^msgstr')
     @a = ''
-    call histdel('/', -1)
+    histdel('/', -1)
     normal z.f"l
   enddef
 endif
 
 export def ClearFuzzyPreviousMessges()
-  call po#RemovePrevious()
-  call po#RemoveFuzzy()
+  po#RemovePrevious()
+  po#RemoveFuzzy()
 enddef
 
 
@@ -220,7 +221,7 @@ if !exists('AddHeaderInfo')
         search_for = 'Language'
         add = g:po_language
       endif
-    # Adding 'Plural-Forms' 
+    # Adding 'Plural-Forms'
     elseif action == 'plural'
       if exists('g:po_plural_form')
         search_for = 'Plural-Forms'
@@ -250,7 +251,7 @@ if !exists('AddHeaderInfo')
       silent! exe 's/^\(' .. search_for .. '\).*$/\1 ' .. add
       # we clear the line then insert corresponding text
       # silent! exe 's/^.*$/{search_for .. ' ' .. add}
-      call histdel('/', -1)
+      histdel('/', -1)
     endif
   enddef
 endif
@@ -279,9 +280,9 @@ if !exists('*PoFileTimestamp')
         silent! exe 's/^\("PO-Revision-Date:\).*$/\1 ' .. strftime("%Y-%m-%d %H:%M%z") .. '\\n"'
       endif
     endif
-    # 
+    #
     while histnr("/") > hist_search && histnr("/") > 0
-      call histdel("/", -1)
+      histdel("/", -1)
     endwhile
     #
     normal `d
