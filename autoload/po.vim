@@ -56,17 +56,30 @@ endif
 # Copy current `msgid` to `msgstr`
 if !exists('*CopyMsgid')
   export def CopyMsgid()
+    normal <Esc>
     normal }
     search('^msgid', 'b')
+<<<<<<< HEAD
     @/ = ''
     histdel('/', -1)
+=======
+    @/ = ""
+    histdel('search', -1)
+>>>>>>> 9f79371 (Update po.vim)
     normal f"
-    onoremap __ /msgstr<CR>
-    normal y__
+    onoremap _ /msgstr<CR>
+    normal y_
+    search('^msgstr')
     @/ = ''
+<<<<<<< HEAD
     histdel('/', -1)
     normal jf""_d$p
     normal 0f"l
+=======
+    histdel('search', -1)
+    normal f""_d$p
+    normal 0fcxx
+>>>>>>> 9f79371 (Update po.vim)
   enddef
 endif
 
