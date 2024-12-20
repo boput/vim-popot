@@ -13,7 +13,7 @@ setlocal cpo&vim
 setlocal commentstring=#\ %s
 setlocal errorformat=%f:%l:\ %m
 
-g:maplocalleader = ","
+g:maplocalleader = ";"
 
 # setlocal makeprg=msgfmt
 
