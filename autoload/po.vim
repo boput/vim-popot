@@ -33,14 +33,28 @@ if !exists('*CommentEntry')
 endif
 
 # Move to next untranslated `msgstr` FORWARD
+# if !exists('*NextTransFwd')
+#   export def NextTransFwd()
+#     search('^msgstr\(\[\d\]\)\=\s*""\(\n\n\)\|\%$')
+#     @/ = ''
+#     histdel('/', -1)
+#     normal z.f"
+#   enddef
+# endif
+
+# Move to next untranslated `msgstr` FORWARD
 if !exists('*NextTransFwd')
   export def NextTransFwd()
-    search('^msgstr\(\[\d\]\)\=\s*""\(\n\n\)\|\%$')
-    @/ = ''
-    histdel('/', -1)
-    normal z.f"
+    if search('^msgstr\(\[\d\]\)\=\s*""\(\n\n\)\|\%$') > 0
+      @/ = ''
+      histdel('/', -1)
+      normal z.f"
+    else
+      echo  "No more  `untranslated' msgid's"
+    endif
   enddef
 endif
+defcompile
 
 # Move to next untranslated `msgstr` BACKWARD
 if !exists('*NextTransBwd')
@@ -65,12 +79,13 @@ if !exists('*CopyMsgid')
     onoremap _ /msgstr<CR>
     normal y_
     search('^msgstr')
+    normal f"
+    normal "_d$p
     @/ = ''
     histdel('/', -1)
-    normal jf""_d$p
-    normal 0f"l
   enddef
 endif
+
 
 # Delete current `msgstr` string
 if !exists('*DeleteTrans')
@@ -88,10 +103,10 @@ endif
 if !exists('*NextFuzzy')
   export def NextFuzzy()
     if search('^#,\(.*,\)\=\s*fuzzy') > 0
-      @a/ = ''
+      @/ = ''
       histdel('/', -1)
       search('^msgstr')
-      @a = ''
+      @/ = ''
       histdel('/', -1)
       normal z.f"l
     else
@@ -99,6 +114,7 @@ if !exists('*NextFuzzy')
     endif
   enddef
 endif
+defcompile
 
 # Move to the previous fuzzy (marked with fuzzy flag, `#, fuzzy`) translation
 if !exists('*PreviousFuzzy')
@@ -137,9 +153,26 @@ if !exists('*InsertFuzzy')
     endfor
   enddef
 endif
-defcompile
 
 # Clear `fuzzy` flag from current entry
+# if !exists('*RemoveFuzzy')
+#   export def RemoveFuzzy()
+#     normal {
+#     var firstline = line('.')
+#     normal }k
+#     search('^#, fuzzy\|^#,\(.*,\)\=\s*fuzzy', 'b', firstline)
+#     if getline(".") =~ '^#,\s*fuzzy$'
+#       normal! dd
+#     elseif getline('.') =~ '^#,\(.*,\)\=\s*fuzzy'
+#       setline(line('.'), substitute(getline('.'), '^#,\(.*,\)\=\s*fuzzy', '#', ''))
+#     endif
+#     search('^msgstr')
+#     @a = ''
+#     histdel('/', -1)
+#     normal z.f"l
+#   enddef
+# endif
+
 if !exists('*RemoveFuzzy')
   export def RemoveFuzzy()
     normal {
@@ -147,18 +180,31 @@ if !exists('*RemoveFuzzy')
     normal }k
     search('^#, fuzzy\|^#,\(.*,\)\=\s*fuzzy', 'b', firstline)
     if getline(".") =~ '^#,\s*fuzzy$'
+      :echo "`fuzzy' flag clerared"
       normal! dd
+      search('^msgstr')
+      @a = ''
+      histdel('/', -1)
+      normal z.f"l
     elseif getline('.') =~ '^#,\(.*,\)\=\s*fuzzy'
       setline(line('.'), substitute(getline('.'), '^#,\(.*,\)\=\s*fuzzy', '#', ''))
+      search('^msgstr')
+      @a = ''
+      histdel('/', -1)
+      normal z.f"l
+    else
+      # search('^msgstr')
+      @a = ''
+      histdel('/', -1)
+      normal z.f"l
+      echo "This `fuzzy' mark is cleared."
     endif
-    search('^msgstr')
-    @a = ''
-    histdel('/', -1)
-    normal z.f"l
   enddef
 endif
 
-# Remove previous (now fuzzy) translation from current entry
+
+
+# Remove previous (fuzzy) translation from current entry
 if !exists('*RemovePrevious')
   export def RemovePrevious()
     normal {
@@ -178,10 +224,10 @@ if !exists('*RemovePrevious')
   enddef
 endif
 
-export def ClearFuzzyPreviousMessges()
-  po#RemovePrevious()
-  po#RemoveFuzzy()
-enddef
+# export def ClearFuzzyPreviousMessges()
+#   po#RemovePrevious()
+#   po#RemoveFuzzy()
+# enddef
 
 
 # Show `msgfmt` statistics for current .po file

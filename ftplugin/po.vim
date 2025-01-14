@@ -72,7 +72,7 @@ endif
 
 # Copy current `msgid` to `msgstr`
 if empty(maparg('<LocalLeader>c', 'n'))
-  nnoremap <buffer> <unique> <LocalLeader>c <ScriptCmd>po.CopyMsgid()<CR>
+  nnoremap <buffer> <unique> <LocalLeader>c <Esc><ScriptCmd>po.CopyMsgid()<CR>
 endif
 if empty(maparg('<LocalLeader>c', 'i'))
   inoremap <buffer> <unique> <LocalLeader>c <Esc><ScriptCmd>po.CopyMsgid()<CR>
