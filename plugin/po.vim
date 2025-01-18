@@ -1,7 +1,7 @@
-# vim9script noclear
+vim9script noclear
 
-# if exists('g:loaded_po')
-#   finish
-# endif
-# g:loaded_po = 1
+if exists('g:loaded_po')
+  finish
+endif
+g:loaded_po = 1
 
